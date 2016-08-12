@@ -16,16 +16,24 @@ public class RegisterDto {
 
     @NotNull
     private final String email;
+    
     @NotNull
     private final String password;
+    
     @NotNull
     private final String firstName;
+    
     @NotNull
     private final String lastName;
+    
     @NotNull
     private final String phone;
+    
     @NotNull
     private final String age;
+    
+    @NotNull
+    private final Boolean isShopper;
 
     /**
      * Main constructor.
@@ -36,6 +44,7 @@ public class RegisterDto {
      * @param lastName the user's last name
      * @param phone the user's phone number
      * @param age the user's age
+     * @param isShopper shows if the registration is for a shopper or a customer
      */
     public RegisterDto(
                     @JsonProperty("email") String email, 
@@ -43,47 +52,48 @@ public class RegisterDto {
                     @JsonProperty("firstName") String firstName, 
                     @JsonProperty("lastName") String lastName, 
                     @JsonProperty("phone") String phone, 
-                    @JsonProperty("age") String age) {
+                    @JsonProperty("age") String age,
+                    @JsonProperty("isShopper") Boolean isShopper) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.age = age;
+        this.isShopper = isShopper;
     }
 
     public String getEmail() {
         return email;
     }
 
-
     public String getPassword() {
         return password;
     }
-
 
     public String getFirstName() {
         return firstName;
     }
 
-
     public String getLastName() {
         return lastName;
     }
-
 
     public String getPhone() {
         return phone;
     }
 
-
     public String getAge() {
         return age;
+    }
+    
+    public Boolean getIsShopper() {
+        return isShopper;
     }
 
     @Override
     public final int hashCode() {
-        return Objects.hash(email, password, firstName, lastName, phone, age);
+        return Objects.hash(email, password, firstName, lastName, phone, age, isShopper);
     }
 
     @Override
@@ -97,14 +107,25 @@ public class RegisterDto {
         }
 
         final RegisterDto other = (RegisterDto) obj;
-        return Objects.equals(this.email, other.email) && Objects.equals(this.password, other.password)
-                        && Objects.equals(this.firstName, other.firstName) && Objects.equals(this.lastName, other.lastName)
-                        && Objects.equals(this.phone, other.phone) && Objects.equals(this.age, other.age);
+        return Objects.equals(this.email, other.email) 
+                        && Objects.equals(this.password, other.password)
+                        && Objects.equals(this.firstName, other.firstName) 
+                        && Objects.equals(this.lastName, other.lastName)
+                        && Objects.equals(this.phone, other.phone) 
+                        && Objects.equals(this.age, other.age)
+                        && Objects.equals(this.isShopper, other.isShopper);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("email", email).append("password", password).append("firstName", firstName).append("lastName", lastName)
-                        .append("phone", phone).append("age", age).toString();
+        return new ToStringBuilder(this)
+                        .append("email", email)
+                        .append("password", password)
+                        .append("firstName", firstName)
+                        .append("lastName", lastName)
+                        .append("phone", phone)
+                        .append("age", age)
+                        .append("isShopper", isShopper)
+                        .toString();
     }
 }

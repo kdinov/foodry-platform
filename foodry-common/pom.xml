@@ -33,6 +33,7 @@
         <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
         <maven-war-plugin.version>2.6</maven-war-plugin.version>
         <mockito-core.version>1.9.5</mockito-core.version>
+        <mybatis.version>3.4.1</mybatis.version>
         <postgresql.version>9.4-1201-jdbc41</postgresql.version>
         <swagger-annotations.version>1.5.3</swagger-annotations.version>
         <swagger-maven-plugin.version>3.1.0</swagger-maven-plugin.version>
@@ -132,6 +133,11 @@
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
             <version>${jersey.server.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
         </dependency>
     </dependencies>
 
