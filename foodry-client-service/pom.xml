@@ -10,7 +10,7 @@
         <relativePath />
     </parent>
 
-    <artifactId>foodry-client</artifactId>
-    <packaging>war</packaging>
+    <artifactId>foodry-client-service</artifactId>
+    <packaging>jar</packaging>
 
 </project>

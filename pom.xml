@@ -10,7 +10,8 @@
     <!-- Aggregator -->
     <modules>
         <module>foodry-administration</module>
-        <module>foodry-client</module>
+        <module>foodry-client-api</module>
+        <module>foodry-client-service</module>
         <module>foodry-common</module>
         <module>foodry-payments</module>
         <module>foodry-statistics</module>

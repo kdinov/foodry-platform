@@ -1,6 +1,6 @@
 // Copyright (c) 2015 Travelex Ltd
 
-package com.foodry.client.model.dto;
+package com.foodry.client.api.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;

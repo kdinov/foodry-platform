@@ -1,6 +1,6 @@
 // Copyright (c) 2016 Foodry Ltd
 
-package com.foodry.client.model.dto;
+package com.foodry.client.api.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;

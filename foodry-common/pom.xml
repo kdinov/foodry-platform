@@ -35,6 +35,7 @@
         <mockito-core.version>1.9.5</mockito-core.version>
         <mybatis.version>3.4.1</mybatis.version>
         <postgresql.version>9.4-1201-jdbc41</postgresql.version>
+        <spring-core.version>4.3.2.RELEASE</spring-core.version>
         <swagger-annotations.version>1.5.3</swagger-annotations.version>
         <swagger-maven-plugin.version>3.1.0</swagger-maven-plugin.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
@@ -125,6 +126,17 @@
             <version>${jersey.server.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.glassfish.jersey.ext</groupId>
+            <artifactId>jersey-spring3</artifactId>
+            <version>${jersey.server.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
             <version>${jersey.server.version}</version>
@@ -138,6 +150,21 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>${mybatis.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-core.version}</version>
         </dependency>
     </dependencies>
 
