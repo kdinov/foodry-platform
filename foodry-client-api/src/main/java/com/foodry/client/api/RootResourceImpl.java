@@ -4,7 +4,6 @@ package com.foodry.client.api;
 
 import com.foodry.client.api.model.dto.RegisterDto;
 import com.foodry.client.api.model.dto.SessionTokenDto;
-import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.util.UUID;
@@ -20,7 +19,6 @@ import javax.ws.rs.core.Response;
 /**
  * Main API.
  */
-@Component
 @Path("/user")
 public class RootResourceImpl {
 
