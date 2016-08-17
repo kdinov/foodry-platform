@@ -3,6 +3,7 @@
 package com.foodry.client.service;
 
 import com.foodry.client.service.model.Customer;
+import com.foodry.client.service.model.Session;
 import com.foodry.client.service.model.Shopper;
 
 /**
@@ -15,16 +16,16 @@ public interface AccountService {
      * 
      * @param customer the customer details
      * @param password the customer password
-     * @return a session token
+     * @return a {@link Session} for that customer
      */
-    String registerCustomer(Customer customer, String password);
+    Session registerCustomer(Customer customer, String password);
     
     /**
      * Register a shopper.
      * 
      * @param shopper the shopper details
      * @param password the shopper password
-     * @return a session token
+     * @return a {@link Session} for that shopper
      */
-    String registerShopper(Shopper shopper, String password);
+    Session registerShopper(Shopper shopper, String password);
 }
