@@ -2,11 +2,11 @@
 
 package com.foodry.client.api;
 
+import com.foodry.client.api.model.DtoToBoFactory;
 import com.foodry.client.api.model.dto.RegisterDto;
 import com.foodry.client.api.model.dto.SessionTokenDto;
-
-import java.net.URI;
-import java.util.UUID;
+import com.foodry.client.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
@@ -19,8 +19,16 @@ import javax.ws.rs.core.Response;
 /**
  * Main API.
  */
-@Path("/user")
+@Path("/")
 public class RootResourceImpl {
+
+    @Autowired
+    private AccountService accountService;
+
+    /**
+     * No-arg constructor required by Jersey.
+     */
+    public RootResourceImpl() {}
 
     @POST
     @Path("/account")
@@ -29,8 +37,10 @@ public class RootResourceImpl {
     public Response register(@Valid RegisterDto registerDto) {
         System.out.println("Received request: " + registerDto.toString());
 
-        return Response.created(URI.create("/user/account/" + UUID.randomUUID().toString()))
-                        .entity(new SessionTokenDto("YOU RECEIVED A TOKEN!"))
-                        .build();
+        String token = registerDto.getIsShopper() 
+                        ? accountService.registerShopper(DtoToBoFactory.convertRegisterDtoToShopper(registerDto), registerDto.getPassword())
+                        : accountService.registerCustomer(DtoToBoFactory.convertRegisterDtoToCustomer(registerDto), registerDto.getPassword());
+                        
+        return Response.ok(new SessionTokenDto(token)).build();
     }
 }
