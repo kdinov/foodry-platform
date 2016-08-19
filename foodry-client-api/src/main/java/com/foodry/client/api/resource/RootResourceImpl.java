@@ -1,6 +1,6 @@
 // Copyright (c) 2016 Foodry Ltd
 
-package com.foodry.client.api;
+package com.foodry.client.api.resource;
 
 import com.foodry.client.api.model.DtoToBoFactory;
 import com.foodry.client.api.model.dto.RegisterDto;

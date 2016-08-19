@@ -2,7 +2,7 @@
 
 package com.foodry.client.api.configuration;
 
-import com.foodry.client.api.RootResourceImpl;
+import com.foodry.client.api.resource.RootResourceImpl;
 import com.foodry.client.service.configuration.ClientServiceConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

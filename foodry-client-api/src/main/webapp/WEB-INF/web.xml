@@ -9,7 +9,7 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-    
+
     <context-param>
         <param-name>contextClass</param-name>
         <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
@@ -28,8 +28,8 @@
         <servlet-name>ClientJerseyServlet</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
-            <param-name>jersey.config.server.provider.classnames</param-name>
-            <param-value>com.foodry.client.api.RootResourceImpl</param-value>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.foodry.client.api.resource;com.foodry.client.api.filter</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
