@@ -8,4 +8,5 @@ deploy:
   api_key:
     secure: 6c892850-d440-4836-88a6-660c9eae8254
   app:
-    develop: foodry
+    develop: foodry-dev
+    master: foodry
