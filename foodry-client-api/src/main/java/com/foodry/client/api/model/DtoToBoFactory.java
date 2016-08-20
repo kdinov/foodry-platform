@@ -12,10 +12,10 @@ import com.foodry.client.service.model.Shopper;
 public class DtoToBoFactory {
 
     public static Customer convertRegisterDtoToCustomer(RegisterDto dto) {
-        return null;
+        return new Customer(dto.getEmail(), dto.getName(), dto.getPhone(), Integer.valueOf(dto.getAge()));
     }
 
     public static Shopper convertRegisterDtoToShopper(RegisterDto dto) {
-        return new Shopper(dto.getEmail(), dto.getFirstName(), dto.getLastName(), dto.getPhone(), Integer.valueOf(dto.getAge()));
+        return new Shopper(dto.getEmail(), dto.getName(), dto.getPhone(), Integer.valueOf(dto.getAge()));
     }
 }

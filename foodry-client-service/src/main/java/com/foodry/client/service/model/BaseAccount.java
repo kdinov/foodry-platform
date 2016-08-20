@@ -9,8 +9,7 @@ package com.foodry.client.service.model;
 public abstract class BaseAccount {
     
     private final String email;
-    private final String firstName;
-    private final String lastName;
+    private final String name;
     private final String phone;
     private final int age;
     private final String passwordHash;
@@ -18,15 +17,13 @@ public abstract class BaseAccount {
     
     public BaseAccount(
                     String email, 
-                    String firstName, 
-                    String lastName, 
+                    String name, 
                     String phone, 
                     int age, 
                     String passwordHash, 
                     String passwordSalt) {
         this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
         this.phone = phone;
         this.age = age;
         this.passwordHash = passwordHash;
@@ -37,12 +34,8 @@ public abstract class BaseAccount {
         return email;
     }
     
-    public String getFirstName() {
-        return firstName;
-    }
-    
-    public String getLastName() {
-        return lastName;
+    public String getName() {
+        return name;
     }
 
     public String getPhone() {
