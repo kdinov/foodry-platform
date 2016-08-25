@@ -3,13 +3,19 @@
 package com.foodry.client.service.configuration;
 
 import com.foodry.client.service.AccountService;
+import com.foodry.client.service.db.PlatformDataAccess;
 import com.foodry.client.service.impl.AccountServiceImpl;
-import org.postgresql.ds.PGPoolingDataSource;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+
+import java.beans.PropertyVetoException;
 
 import javax.sql.DataSource;
 
@@ -18,6 +24,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @PropertySource({"classpath:postgres.properties"})
+@MapperScan("com.foodry.client.service.db.mapper")
 public class ClientServiceConfiguration {
 
     @Value("${SERVER_URL:${serverUrl}}")
@@ -26,8 +33,8 @@ public class ClientServiceConfiguration {
     @Value("${datasourceName}")
     private String datasourceName;
     
-    @Value("${database}")
-    private String database;
+    @Value("${driverClass}")
+    private String driverClass;
     
     @Value("${username}")
     private String username;
@@ -36,8 +43,10 @@ public class ClientServiceConfiguration {
     private String password;
     
     @Value("${MAX_CONNECTIONS:${maxConnections}}")
-    private String maxConnections;
+    private int maxConnections;
     
+    @Value("${maxStatements}")
+    private int maxStatements;
     
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -50,19 +59,35 @@ public class ClientServiceConfiguration {
      * @return a {@link DataSource} instance
      */
     @Bean
-    public DataSource createDataSourceConfiguration() {
-        PGPoolingDataSource pgDataSource = new PGPoolingDataSource();
-        pgDataSource.setDataSourceName(datasourceName);
-        pgDataSource.setServerName(serverUrl);
-        pgDataSource.setDatabaseName(database);
-        pgDataSource.setUser(username);
-        pgDataSource.setPassword(password);
-        pgDataSource.setMaxConnections(Integer.valueOf(maxConnections));
-        return pgDataSource;
+    public DataSource createDataSourceConfiguration() throws PropertyVetoException {
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
+        dataSource.setDriverClass(driverClass);
+        dataSource.setJdbcUrl(serverUrl);
+        dataSource.setUser(username);
+        dataSource.setPassword(password);
+        dataSource.setMaxPoolSize(maxConnections);
+        dataSource.setMaxStatements(maxStatements);
+        dataSource.setTestConnectionOnCheckout(true);
+        dataSource.setDataSourceName(datasourceName);
+
+        return dataSource;
     }
     
     @Bean
-    public AccountService createAccountService() {
-        return new AccountServiceImpl();
+    public SqlSessionFactory createSqlSessionFactory() throws Exception {
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        factoryBean.setDataSource(createDataSourceConfiguration());
+        
+        return factoryBean.getObject();
+    }
+    
+    @Bean
+    public AccountService createAccountService() throws Exception {
+        return new AccountServiceImpl(createDataAccess());
+    }
+    
+    @Bean 
+    public PlatformDataAccess createDataAccess() throws Exception {
+        return new PlatformDataAccess(createSqlSessionFactory());
     }
 }

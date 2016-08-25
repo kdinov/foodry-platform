@@ -7,6 +7,8 @@ import com.foodry.client.api.model.dto.RegisterDto;
 import com.foodry.client.api.model.dto.SessionTokenDto;
 import com.foodry.client.service.AccountService;
 import com.foodry.client.service.model.Session;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URI;
@@ -24,6 +26,8 @@ import javax.ws.rs.core.Response;
  */
 @Path("/")
 public class RootResourceImpl {
+    
+    private static final Logger LOGGER = LogManager.getLogger(RootResourceImpl.class);
 
     private static final String PATH = "/foodry";
     private static final String ACCOUNT = "/account";
@@ -41,7 +45,7 @@ public class RootResourceImpl {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response register(@Valid RegisterDto registerDto) {
-        System.out.println("Received request: " + registerDto.toString());
+        LOGGER.debug("Received request: {}", registerDto);
 
         Session session = registerDto.getIsShopper() 
                         ? accountService.registerShopper(DtoToBoFactory.convertRegisterDtoToShopper(registerDto), registerDto.getPassword())

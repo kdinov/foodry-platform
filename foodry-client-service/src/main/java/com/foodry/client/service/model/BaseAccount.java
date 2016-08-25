@@ -12,8 +12,8 @@ public abstract class BaseAccount {
     private final String name;
     private final String phone;
     private final int age;
-    private final String passwordHash;
-    private final String passwordSalt;
+    private String passwordHash;
+    private String passwordSalt;
     
     public BaseAccount(
                     String email, 
@@ -30,6 +30,7 @@ public abstract class BaseAccount {
         this.passwordSalt = passwordSalt;
     }
 
+    
     public String getEmail() {
         return email;
     }
@@ -50,8 +51,16 @@ public abstract class BaseAccount {
         return passwordHash;
     }
 
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
     public String getPasswordSalt() {
         return passwordSalt;
+    }
+
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
     
 }
